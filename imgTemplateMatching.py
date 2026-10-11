@@ -27,7 +27,6 @@ OpenCV template matching methods:
  For CCOEFF and CCORR methods, higher scores indicate better matches.
  For SQDIFF methods, lower scores indicate better matches.
 """
-
 methods = [cv2.TM_CCOEFF, cv2.TM_CCOEFF_NORMED, cv2.TM_CCORR, cv2.TM_CCORR_NORMED, cv2.TM_SQDIFF, cv2.TM_SQDIFF_NORMED]
 
 for method in methods:
