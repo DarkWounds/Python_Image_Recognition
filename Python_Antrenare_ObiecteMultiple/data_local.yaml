@@ -1,0 +1,9 @@
+names:
+- Crema Maini
+- Rubiks Cube
+- Super Glue
+nc: 3
+path: D:/Python_Image_Recognition/Python_Antrenare_ObiecteMultiple
+test: test/images
+train: train/images
+val: valid/images
