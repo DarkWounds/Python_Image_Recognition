@@ -1,0 +1,3 @@
+mAP50-95 yolov8: 0.6569
+mAP50-95 yolo26: 0.6975
+E mai mare map50-95 yolo26 cu: 6.19%
