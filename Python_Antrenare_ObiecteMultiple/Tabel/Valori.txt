@@ -1,0 +1,16 @@
+mAP50-95_yolov8: 0.6569
+mAP50-95_yolo26: 0.6975
+precision8: 0.9899
+precision26: 0.9741
+recall8: 0.9074
+recall26: 0.8171
+preprocess8: 0.8186
+preprocess26: 0.8220
+inference8: 12.0622
+inference26: 15.7825
+postprocess8: 1.9369
+postprocess26: 1.5523
+latenta_totala8: 14.8177
+latenta_totala26: 18.1568
+FPS8: 67.4870
+FPS26: 55.0757
