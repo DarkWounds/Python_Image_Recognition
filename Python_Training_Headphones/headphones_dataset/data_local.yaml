@@ -1,0 +1,6 @@
+path: D:/Python_Image_Recognition/Python_Training_Headphones/headphones_dataset
+train: train/images
+val: valid/images
+test: test/images
+nc: 1
+names: ['Headphones']

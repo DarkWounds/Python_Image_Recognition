@@ -5,10 +5,10 @@ import os
 img = cv2.imread('assets/puiu.png', 1)  # Same thing as above
 
 if img is None:
-    print("Imaginea nu a fost găsită!")
+    print("Image not found!")
     exit(0)
 else:
-    print("Imagine încărcată cu succes.")
+    print("Image loaded successfully.")
 
 img = cv2.resize(img, (1000, 1000))  # Resize the image to 400x400 pixels
 img = cv2.resize(img, (0, 0), fx = 0.5, fy = 0.5) #

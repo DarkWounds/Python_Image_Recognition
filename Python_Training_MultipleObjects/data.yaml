@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 3
+names: ['Hand Cream', 'Rubiks Cube', 'Super Glue']
+
+roboflow:
+  workspace: dark-wounds-ivis-paduraru-natalia-maria
+  project: rubik-cream-super-glue
+  version: 1
+  license: Private
+  url: https://app.roboflow.com/dark-wounds-ivis-paduraru-natalia-maria/rubik-cream-super-glue/1

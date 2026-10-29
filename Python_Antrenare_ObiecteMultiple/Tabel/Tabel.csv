@@ -1,9 +1,0 @@
-Metrica,YOLOv8,YOLO26
-mAP50-95,0.6569,0.6975
-precision,0.9899,0.9741
-recall,0.9074,0.8171
-preprocess,0.8186,0.822
-inference,12.0622,15.7825
-postprocess,1.9369,1.5523
-latenta_totala,14.8177,18.1568
-FPS,67.487,55.0757

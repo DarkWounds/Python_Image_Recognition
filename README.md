@@ -27,17 +27,17 @@ All models start from a pretrained nano model and are fine-tuned on my own photo
 
 | Folder | Classes | Dataset (train / valid / test) |
 |---|---|---|
-| `Python_Antrenare_Fisiere_Casti/` | headphones (`CASTI`) | 107 / 31 / 15 images |
-| `Python_Antrenare_Fisiere_Crema/` | hand cream | trained model only (`weights.pt`) |
-| `Python_Antrenare_ObiecteMultiple/` | hand cream, Rubik's cube, super glue | 104 / 32 / 17 images |
+| `Python_Training_Headphones/` | headphones (`Headphones`) | 107 / 31 / 15 images |
+| `Python_Training_HandCream/` | hand cream | trained model only (`weights.pt`) |
+| `Python_Training_MultipleObjects/` | hand cream, Rubik's cube, super glue | 104 / 32 / 17 images |
 
-Training settings: 50 epochs, 640 px images. The headphones model was trained both in Google Colab on a T4 GPU (`antrenare_casti.ipynb`) and locally on CPU (`antrenare.py`). The multi-class model was trained locally, on the NVIDIA GPU when available. `antrenare.py` reads the class names from `data.yaml` automatically, writes a local `data_local.yaml`, trains, evaluates on the test split and saves the test images with the predicted boxes.
+Training settings: 50 epochs, 640 px images. The headphones model was trained both in Google Colab on a T4 GPU (`train_headphones.ipynb`) and locally on CPU (`train.py`). The multi-class model was trained locally, on the NVIDIA GPU when available. `train.py` reads the class names from `data.yaml` automatically, writes a local `data_local.yaml`, trains, evaluates on the test split and saves the test images with the predicted boxes.
 
 Each detection is drawn as a bounding box with the class name and a confidence score between 0 and 1.
 
 ### 3. YOLOv8n vs YOLO26n
 
-On the 3-class dataset I trained both `yolov8n` and `yolo26n` with the same settings (50 epochs, 640 px) and compared them on the test split (`Verificare.py`, `Tabel/Tabel.py`):
+On the 3-class dataset I trained both `yolov8n` and `yolo26n` with the same settings (50 epochs, 640 px) and compared them on the test split (`Evaluate.py`, `Chart/Chart.py`):
 
 | Metric | YOLOv8n | YOLO26n |
 |---|---|---|
@@ -49,7 +49,7 @@ On the 3-class dataset I trained both `yolov8n` and `yolo26n` with the same sett
 
 On this small dataset YOLO26n draws tighter boxes (higher mAP50-95), while YOLOv8n finds more of the objects (higher recall) and runs faster on my laptop GPU.
 
-![YOLOv8 vs YOLO26](Python_Antrenare_ObiecteMultiple/Tabel/Comparatie.png)
+![YOLOv8 vs YOLO26](Python_Training_MultipleObjects/Chart/Comparison.png)
 
 ## How to run
 
@@ -65,15 +65,13 @@ OpenCV scripts:
 python imgFaceEyeDetect.py   # press q to quit
 ```
 
-Train a YOLO model: put `antrenare.py` next to `data.yaml` and the `train/ valid/ test/` folders of a Roboflow YOLO export, then run `python antrenare.py` (or double-click `Antrenare.bat` on Windows).
+Train a YOLO model: put `train.py` next to `data.yaml` and the `train/ valid/ test/` folders of a Roboflow YOLO export, then run `python train.py` (or double-click `Train.bat` on Windows).
 
-Live detection with the webcam: double-click `Detectie_Camera.bat` in a model folder, or run
+Live detection with the webcam: double-click `Camera_Detection.bat` in a model folder, or run
 
 ```bash
 yolo predict model=runs/model/weights/best.pt source=0 show=True conf=0.6
 ```
-
-Note: `Verificare.py` uses absolute `D:\` paths; change `FOLDER` at the top to your own path.
 
 ## Tech
 

@@ -9,7 +9,7 @@ img = cv2.imread("assets/chess.jpg", 1)
 
 
 if img is None:
-    print("Nu a fost gasita")
+    print("Image not found")
     exit()
 
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
