@@ -5,6 +5,8 @@ import numpy as np
 FOLDER = os.path.dirname(os.path.abspath(__file__))
 TXT_PATH = os.path.join(FOLDER, "Values.txt")
 
+MODELS = ["YOLOv8", "YOLO26", "YOLO12"]
+
 
 def read_values(path):
     values = {}
@@ -26,10 +28,14 @@ def split_by_model(values):
     for key, value in values.items():
         if key.endswith("_yolo26"):
             metric, model = key[:-len("_yolo26")], "YOLO26"
+        elif key.endswith("_yolo12"):
+            metric, model = key[:-len("_yolo12")], "YOLO12"
         elif key.endswith("_yolov8"):
             metric, model = key[:-len("_yolov8")], "YOLOv8"
         elif key.endswith("26"):
             metric, model = key[:-2], "YOLO26"
+        elif key.endswith("12"):
+            metric, model = key[:-2], "YOLO12"
         elif key.endswith("8"):
             metric, model = key[:-1], "YOLOv8"
         else:
@@ -41,14 +47,14 @@ def split_by_model(values):
 def bar_chart(ax, table, metrics, title, unit):
     metrics = [m for m in metrics if m in table]
     x = np.arange(len(metrics))
-    width = 0.35
-    v8 = [table[m].get("YOLOv8", 0) for m in metrics]
-    v26 = [table[m].get("YOLO26", 0) for m in metrics]
+    n = len(MODELS)
+    width = 0.8 / n
 
-    b1 = ax.bar(x - width / 2, v8, width, label="YOLOv8")
-    b2 = ax.bar(x + width / 2, v26, width, label="YOLO26")
-    ax.bar_label(b1, fmt="%.3f", fontsize=8)
-    ax.bar_label(b2, fmt="%.3f", fontsize=8)
+    for i, model in enumerate(MODELS):
+        vals = [table[m].get(model, 0) for m in metrics]
+        offset = (i - (n - 1) / 2) * width
+        bars = ax.bar(x + offset, vals, width, label=model)
+        ax.bar_label(bars, fmt="%.3f", fontsize=7)
 
     ax.set_xticks(x)
     ax.set_xticklabels(metrics)
@@ -61,8 +67,8 @@ def bar_chart(ax, table, metrics, title, unit):
 def main():
     table = split_by_model(read_values(TXT_PATH))
 
-    fig, axes = plt.subplots(2, 2, figsize=(13, 8))
-    fig.suptitle("YOLOv8 vs YOLO26", fontsize=14)
+    fig, axes = plt.subplots(2, 2, figsize=(14, 8))
+    fig.suptitle(" vs ".join(MODELS), fontsize=14)
 
     bar_chart(axes[0, 0], table, ["mAP50-95", "precision", "recall"], "Accuracy", "value (0-1)")
     bar_chart(axes[0, 1], table, ["preprocess", "inference", "postprocess", "total_latency"], "Speed per image", "ms")
@@ -71,8 +77,8 @@ def main():
     # table with all the values
     ax_t = axes[1, 1]
     ax_t.axis("off")
-    rows = [[m, f"{v.get('YOLOv8', 0):.4f}", f"{v.get('YOLO26', 0):.4f}"] for m, v in table.items()]
-    t = ax_t.table(cellText=rows, colLabels=["Metric", "YOLOv8", "YOLO26"], loc="center", cellLoc="center")
+    rows = [[m] + [f"{v.get(model, 0):.4f}" for model in MODELS] for m, v in table.items()]
+    t = ax_t.table(cellText=rows, colLabels=["Metric"] + MODELS, loc="center", cellLoc="center")
     t.auto_set_font_size(False)
     t.set_fontsize(9)
     t.scale(1, 1.3)
