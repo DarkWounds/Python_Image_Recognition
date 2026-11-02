@@ -1,0 +1,22 @@
+# ===== Mediu Python si IDE =====
+.venv/
+.idea/
+__pycache__/
+*.pyc
+
+# ===== Dataset-uri (poze + etichete) - sunt in Roboflow =====
+**/train/
+**/valid/
+**/test/
+*.zip
+
+# ===== K-Fold: fold-urile sunt copii ale dataset-ului + antrenari =====
+# (raman scripturile si rezultatele din KFold: .py, .bat, Values_*.txt, .xlsx, .png)
+**/KFold/fold*/
+
+# ===== Antrenari si modele =====
+**/runs/
+*.pt
+
+# ===== Fisiere generate cu cai locale (D:/...) =====
+data_local.yaml
