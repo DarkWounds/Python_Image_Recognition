@@ -20,3 +20,4 @@ __pycache__/
 
 # ===== Fisiere generate cu cai locale (D:/...) =====
 data_local.yaml
+Claude outputs/
